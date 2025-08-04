@@ -1,0 +1,12 @@
+FONT - "LEAGUE SPARTAN"
+
+MONEY
+1 - white 
+2 - pink #de155d
+3 - blue #7dcfff
+4 - green #6fc357
+5 - purple #a977d5
+10 - orange #ff8744
+
+PROPERTIES
+brown - #af4c0f - "EAST HASTINGS"
