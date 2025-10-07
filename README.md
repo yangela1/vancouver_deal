@@ -5,6 +5,11 @@
 - SvelteKit
 - SQLite
 
+## Dependencies
+
+- Node.js 24
+- pnpm 10
+
 ## Notes
 
 - Mobile first
