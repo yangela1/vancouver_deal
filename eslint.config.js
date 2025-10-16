@@ -42,13 +42,17 @@ export default defineConfig(
   },
   {
     files: ["**/*.svelte", "**/*.svelte.ts", "**/*.svelte.js"],
-    extends: [ts.configs.disableTypeChecked],
     languageOptions: {
       parserOptions: {
         projectService: true,
         extraFileExtensions: [".svelte"],
         parser: ts.parser,
         svelteConfig,
+      },
+    },
+    settings: {
+      svelte: {
+        ignoreWarnings: ["@typescript-eslint/no-unsafe-call"],
       },
     },
   },
