@@ -1,1 +1,6 @@
+@import "@fontsource-variable/outfit";
 @import "tailwindcss";
+
+@theme {
+  --font-display: "Outfit Variable";
+}
