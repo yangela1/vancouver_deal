@@ -13,39 +13,33 @@ export type Colour =
 export interface MoneyCard {
   type: "money";
   value: number;
-  quantity: number;
 }
 
 export interface ActionCard {
   type: "action";
   name: string;
   value: number;
-  quantity: number;
 }
 
 export interface RentCard {
   type: "rent";
   colours: Colour[];
   value: number;
-  quantity: number;
 }
 
 export interface RentRainbowCard {
   type: "rent_rainbow";
   value: number;
-  quantity: number;
 }
 
 export interface PropertyWildCard {
   type: "property_wild";
   colours: Colour[];
   value: number;
-  quantity: number;
 }
 
 export interface PropertyRainbowCard {
   type: "property_rainbow";
-  quantity: number;
 }
 
 export interface PropertyCard {
@@ -61,6 +55,13 @@ export type Card =
   | RentRainbowCard
   | PropertyWildCard
   | PropertyRainbowCard
+  | PropertyCard;
+
+type CardQuantity =
+  | {
+      card: Exclude<Card, PropertyCard>;
+      quantity: number;
+    }
   | PropertyCard;
 
 export interface RentData {
@@ -116,176 +117,236 @@ export function getValue(card: PropertyCard) {
   }
 }
 
-export const deck: Card[] = [
+export const deckQuantities: CardQuantity[] = [
   {
-    type: "money",
-    value: 1,
+    card: {
+      type: "money",
+      value: 1,
+    },
     quantity: 6,
   },
   {
-    type: "money",
-    value: 2,
+    card: {
+      type: "money",
+      value: 2,
+    },
     quantity: 5,
   },
   {
-    type: "money",
-    value: 3,
+    card: {
+      type: "money",
+      value: 3,
+    },
     quantity: 3,
   },
   {
-    type: "money",
-    value: 4,
+    card: {
+      type: "money",
+      value: 4,
+    },
     quantity: 3,
   },
   {
-    type: "money",
-    value: 5,
+    card: {
+      type: "money",
+      value: 5,
+    },
     quantity: 2,
   },
   {
-    type: "money",
-    value: 10,
+    card: {
+      type: "money",
+      value: 10,
+    },
     quantity: 1,
   },
   {
-    type: "action",
-    name: "pass_go",
-    value: 1,
+    card: {
+      type: "action",
+      name: "pass_go",
+      value: 1,
+    },
     quantity: 10,
   },
   {
-    type: "action",
-    name: "rent_increase",
-    value: 1,
+    card: {
+      type: "action",
+      name: "rent_increase",
+      value: 1,
+    },
     quantity: 2,
   },
   {
-    type: "action",
-    name: "convenience_fee",
-    value: 2,
+    card: {
+      type: "action",
+      name: "convenience_fee",
+      value: 2,
+    },
     quantity: 3,
   },
   {
-    type: "action",
-    name: "security_deposit",
-    value: 3,
+    card: {
+      type: "action",
+      name: "security_deposit",
+      value: 3,
+    },
     quantity: 3,
   },
   {
-    type: "action",
-    name: "new_landlord",
-    value: 3,
+    card: {
+      type: "action",
+      name: "new_landlord",
+      value: 3,
+    },
     quantity: 3,
   },
   {
-    type: "action",
-    name: "property_repod",
-    value: 3,
+    card: {
+      type: "action",
+      name: "property_repod",
+      value: 3,
+    },
     quantity: 3,
   },
   {
-    type: "action",
-    name: "laneway_house",
-    value: 3,
+    card: {
+      type: "action",
+      name: "laneway_house",
+      value: 3,
+    },
     quantity: 3,
   },
   {
-    type: "action",
-    name: "condo_tower",
-    value: 4,
+    card: {
+      type: "action",
+      name: "condo_tower",
+      value: 4,
+    },
     quantity: 2,
   },
   {
-    type: "action",
-    name: "tax_evasion",
-    value: 4,
+    card: {
+      type: "action",
+      name: "tax_evasion",
+      value: 4,
+    },
     quantity: 3,
   },
   {
-    type: "action",
-    name: "mass_eviction",
-    value: 5,
+    card: {
+      type: "action",
+      name: "mass_eviction",
+      value: 5,
+    },
     quantity: 2,
   },
   {
-    type: "rent",
-    colours: ["brown", "lightblue"],
-    value: 1,
+    card: {
+      type: "rent",
+      colours: ["brown", "lightblue"],
+      value: 1,
+    },
     quantity: 2,
   },
   {
-    type: "rent",
-    colours: ["mint", "black"],
-    value: 1,
+    card: {
+      type: "rent",
+      colours: ["mint", "black"],
+      value: 1,
+    },
     quantity: 2,
   },
   {
-    type: "rent",
-    colours: ["magenta", "orange"],
-    value: 1,
+    card: {
+      type: "rent",
+      colours: ["magenta", "orange"],
+      value: 1,
+    },
     quantity: 2,
   },
   {
-    type: "rent",
-    colours: ["red", "yellow"],
-    value: 1,
+    card: {
+      type: "rent",
+      colours: ["red", "yellow"],
+      value: 1,
+    },
     quantity: 2,
   },
   {
-    type: "rent",
-    colours: ["darkblue", "green"],
-    value: 1,
+    card: {
+      type: "rent",
+      colours: ["darkblue", "green"],
+      value: 1,
+    },
     quantity: 2,
   },
   {
-    type: "rent_rainbow",
-    value: 3,
+    card: {
+      type: "rent_rainbow",
+      value: 3,
+    },
     quantity: 3,
   },
   {
-    type: "property_wild",
-    colours: ["lightblue", "brown"],
-    value: 1,
+    card: {
+      type: "property_wild",
+      colours: ["lightblue", "brown"],
+      value: 1,
+    },
     quantity: 1,
   },
   {
-    type: "property_wild",
-    colours: ["black", "mint"],
-    value: 2,
+    card: {
+      type: "property_wild",
+      colours: ["black", "mint"],
+      value: 2,
+    },
     quantity: 1,
   },
   {
-    type: "property_wild",
-    colours: ["magenta", "orange"],
-    value: 2,
+    card: {
+      type: "property_wild",
+      colours: ["magenta", "orange"],
+      value: 2,
+    },
     quantity: 2,
   },
   {
-    type: "property_wild",
-    colours: ["red", "yellow"],
-    value: 3,
+    card: {
+      type: "property_wild",
+      colours: ["red", "yellow"],
+      value: 3,
+    },
     quantity: 2,
   },
   {
-    type: "property_wild",
-    colours: ["darkblue", "green"],
-    value: 4,
+    card: {
+      type: "property_wild",
+      colours: ["darkblue", "green"],
+      value: 4,
+    },
     quantity: 1,
   },
   {
-    type: "property_wild",
-    colours: ["green", "black"],
-    value: 4,
+    card: {
+      type: "property_wild",
+      colours: ["green", "black"],
+      value: 4,
+    },
     quantity: 1,
   },
   {
-    type: "property_wild",
-    colours: ["lightblue", "black"],
-    value: 4,
+    card: {
+      type: "property_wild",
+      colours: ["lightblue", "black"],
+      value: 4,
+    },
     quantity: 1,
   },
   {
-    type: "property_rainbow",
+    card: {
+      type: "property_rainbow",
+    },
     quantity: 2,
   },
   {
