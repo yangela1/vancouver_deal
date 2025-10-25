@@ -73,51 +73,8 @@ export interface RentData {
   tower?: number;
 }
 
-export function getImage(card: Card) {
-  switch (card.type) {
-    case "money":
-      return `assets/money/${card.value}.png`;
-    case "action":
-      return `assets/action/${card.name}.png`;
-    case "rent":
-      return `assets/action/rent/${card.colours.join("_")}.png`;
-    case "rent_rainbow":
-      return "assets/action/rent/rainbow.png";
-    case "property_wild":
-      return `assets/property/wild/${card.colours.join("_")}.png`;
-    case "property_rainbow":
-      return "assets/property/wild/rainbow.png";
-    case "property":
-      return `assets/property/${card.colour}/${card.name}.png`;
-  }
-}
-
-export function getValue(card: PropertyCard) {
-  switch (card.colour) {
-    case "brown":
-      return 1;
-    case "lightblue":
-      return 1;
-    case "magenta":
-      return 2;
-    case "orange":
-      return 2;
-    case "red":
-      return 3;
-    case "yellow":
-      return 3;
-    case "green":
-      return 4;
-    case "darkblue":
-      return 4;
-    case "black":
-      return 2;
-    case "mint":
-      return 2;
-  }
-}
-
-export const deckQuantities: CardQuantity[] = [
+// Deck with one copy of each card, and quantity that each card should have.
+const deckQuantities: CardQuantity[] = [
   {
     card: {
       type: "money",
@@ -491,6 +448,7 @@ export const deckQuantities: CardQuantity[] = [
   },
 ];
 
+// The rent costs associated with each property colour.
 export const rent: Record<Colour, RentData> = {
   brown: {
     1: 1,
@@ -557,3 +515,57 @@ export const rent: Record<Colour, RentData> = {
     2: 2,
   },
 };
+
+/**
+ * Get the path to image associated with a card.
+ * @param card the card whose image to get
+ * @returns the path to the card's image
+ */
+export function getImage(card: Card) {
+  switch (card.type) {
+    case "money":
+      return `assets/money/${card.value}.png`;
+    case "action":
+      return `assets/action/${card.name}.png`;
+    case "rent":
+      return `assets/action/rent/${card.colours.join("_")}.png`;
+    case "rent_rainbow":
+      return "assets/action/rent/rainbow.png";
+    case "property_wild":
+      return `assets/property/wild/${card.colours.join("_")}.png`;
+    case "property_rainbow":
+      return "assets/property/wild/rainbow.png";
+    case "property":
+      return `assets/property/${card.colour}/${card.name}.png`;
+  }
+}
+
+/**
+ * Get the value associated with a property card, based on its colour.
+ * @param card the card whose value to get
+ * @returns the card's value
+ */
+export function getValue(card: PropertyCard) {
+  switch (card.colour) {
+    case "brown":
+      return 1;
+    case "lightblue":
+      return 1;
+    case "magenta":
+      return 2;
+    case "orange":
+      return 2;
+    case "red":
+      return 3;
+    case "yellow":
+      return 3;
+    case "green":
+      return 4;
+    case "darkblue":
+      return 4;
+    case "black":
+      return 2;
+    case "mint":
+      return 2;
+  }
+}
