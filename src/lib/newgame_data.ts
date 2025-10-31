@@ -448,6 +448,13 @@ const deckQuantities: CardQuantity[] = [
   },
 ];
 
+// Deck with quantities of each card as specified in deckQuantities.
+const deck: Card[] = deckQuantities.flatMap((card) =>
+  Array.from({ length: "quantity" in card ? card.quantity : 1 }, () =>
+    structuredClone("card" in card ? card.card : card),
+  ),
+);
+
 // The rent costs associated with each property colour.
 export const rent: Record<Colour, RentData> = {
   brown: {
@@ -515,6 +522,19 @@ export const rent: Record<Colour, RentData> = {
     2: 2,
   },
 };
+
+/**
+ * Create a new deck, shuffled using the Fisher-Yates algorithm.
+ * @returns the shuffled deck
+ */
+export function newDeck() {
+  const shuffledDeck = structuredClone(deck);
+  for (let i = shuffledDeck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledDeck[i], shuffledDeck[j]] = [shuffledDeck[j]!, shuffledDeck[i]!];
+  }
+  return shuffledDeck;
+}
 
 /**
  * Get the path to image associated with a card.
