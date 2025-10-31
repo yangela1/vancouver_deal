@@ -64,14 +64,24 @@ type CardQuantity =
     }
   | PropertyCard;
 
-export interface RentData {
-  1: number;
-  2: number;
-  3?: number;
-  4?: number;
-  house?: number;
-  tower?: number;
-}
+export type RentData =
+  | {
+      1: number;
+      2: number;
+      3?: number;
+      house: number;
+      tower: number;
+    }
+  | {
+      1: number;
+      2: number;
+    }
+  | {
+      1: number;
+      2: number;
+      3: number;
+      4: number;
+    };
 
 // Deck with one copy of each card, and quantity that each card should have.
 const deckQuantities: CardQuantity[] = [
@@ -523,6 +533,20 @@ export const rent: Record<Colour, RentData> = {
   },
 };
 
+// The value associated with each property colour.
+export const value: Record<Colour, Number> = {
+  brown: 1,
+  lightblue: 1,
+  magenta: 2,
+  orange: 2,
+  red: 3,
+  yellow: 3,
+  green: 4,
+  darkblue: 4,
+  black: 2,
+  mint: 2,
+};
+
 /**
  * Create a new deck, shuffled using the Fisher-Yates algorithm.
  * @returns the shuffled deck
@@ -557,35 +581,5 @@ export function getImage(card: Card) {
       return "assets/property/wild/rainbow.png";
     case "property":
       return `assets/property/${card.colour}/${card.name}.png`;
-  }
-}
-
-/**
- * Get the value associated with a property card, based on its colour.
- * @param card the card whose value to get
- * @returns the card's value
- */
-export function getValue(card: PropertyCard) {
-  switch (card.colour) {
-    case "brown":
-      return 1;
-    case "lightblue":
-      return 1;
-    case "magenta":
-      return 2;
-    case "orange":
-      return 2;
-    case "red":
-      return 3;
-    case "yellow":
-      return 3;
-    case "green":
-      return 4;
-    case "darkblue":
-      return 4;
-    case "black":
-      return 2;
-    case "mint":
-      return 2;
   }
 }
