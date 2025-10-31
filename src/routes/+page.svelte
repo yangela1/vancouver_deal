@@ -1,6 +1,11 @@
 <script lang="ts">
-  const btn =
-    "rounded-lg bg-cyan-500 px-5 py-2 shadow-md/50 transition hover:bg-cyan-400 hover:shadow-lg/50";
+  const links = [
+    ["/start", "Start a Game"],
+    ["/join", "Join a Game"],
+    ["/rules", "View the Rules"],
+    ["/credits", "Credits"],
+    ["https://github.com/yangela1/vancouver_deal", "Source Code", "_blank"],
+  ];
 </script>
 
 <div class="px-5 py-10 text-center font-display">
@@ -19,17 +24,14 @@
         <p class="text-2xl">
           Live out your home ownership dream...now available as a card game!
         </p>
-        <a href="/start"><button class={btn}>Start a Game</button></a>
-        <br />
-        <a href="/join"><button class={btn}>Join a Game</button></a>
-        <br />
-        <a href="/rules"><button class={btn}>View the Rules</button></a>
-        <br />
-        <a href="/credits"><button class={btn}>Credits</button></a>
-        <br />
-        <a href="https://github.com/yangela1/vancouver_deal" target="_blank">
-          <button class={btn}>Source Code</button>
-        </a>
+        {#each links as [link, text, target] (link)}
+          <a href={link} {target}
+            ><button
+              class="rounded-lg bg-cyan-500 px-5 py-2 shadow-md/50 transition hover:bg-cyan-400 hover:shadow-lg/50"
+              >{text}</button
+            ></a
+          ><br />
+        {/each}
       </div>
     </div>
   </div>
