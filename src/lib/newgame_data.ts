@@ -534,7 +534,7 @@ export const rent: Record<Colour, RentData> = {
 };
 
 // The value associated with each property colour.
-export const value: Record<Colour, Number> = {
+export const value: Record<Colour, number> = {
   brown: 1,
   lightblue: 1,
   magenta: 2,
@@ -555,6 +555,9 @@ export function newDeck() {
   const shuffledDeck = structuredClone(deck);
   for (let i = shuffledDeck.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
+
+    // Algorithm is guaranteed to not exit array bounds
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     [shuffledDeck[i], shuffledDeck[j]] = [shuffledDeck[j]!, shuffledDeck[i]!];
   }
   return shuffledDeck;
@@ -568,7 +571,7 @@ export function newDeck() {
 export function getImage(card: Card) {
   switch (card.type) {
     case "money":
-      return `assets/money/${card.value}.png`;
+      return `assets/money/${card.value.toString()}.png`;
     case "action":
       return `assets/action/${card.name}.png`;
     case "rent":
