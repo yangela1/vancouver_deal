@@ -13,11 +13,11 @@
   ] as const;
 </script>
 
-<div class="px-5 py-10 text-center font-display">
+<div class="px-2 py-5 text-center font-display sm:py-10">
   <div class="mx-auto flex max-w-lg rounded-4xl bg-zinc-100 shadow-lg/50">
     <div class="m-3 rounded-3xl border-3 *:px-10 *:py-5">
       <div
-        class="rounded-t-[calc(theme(borderRadius.3xl)-3px)] border-b-3 bg-cyan-500"
+        class="rounded-t-[calc(var(--radius-3xl)-3px)] border-b-3 bg-cyan-500"
       >
         <h1
           class="text-4xl font-black drop-shadow-[3px_3px_0_rgba(0,0,0,0.3)] sm:text-5xl"
@@ -25,7 +25,7 @@
           Vancouver Housing Market: Deal
         </h1>
       </div>
-      <div class="space-y-7 text-xl font-semibold">
+      <div class="space-y-4 text-xl font-semibold">
         <p class="text-2xl">
           Live out your home ownership dream...now available as a card game!
         </p>
