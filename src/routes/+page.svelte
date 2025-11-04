@@ -1,11 +1,16 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
+
   const links = [
-    ["/start", "Start a Game"],
-    ["/join", "Join a Game"],
-    ["/rules", "View the Rules"],
-    ["/credits", "Credits"],
-    ["https://github.com/yangela1/vancouver_deal", "Source Code", "_blank"],
-  ];
+    { href: "/start", text: "Start a Game" },
+    { href: "/join", text: "Join a Game" },
+    { href: "/rules", text: "View the Rules" },
+    { href: "/credits", text: "Credits" },
+  ] as const;
+
+  const externalLinks = [
+    { href: "https://github.com/yangela1/vancouver_deal", text: "Source Code" },
+  ] as const;
 </script>
 
 <div class="px-5 py-10 text-center font-display">
@@ -24,13 +29,26 @@
         <p class="text-2xl">
           Live out your home ownership dream...now available as a card game!
         </p>
-        {#each links as [link, text, target] (link)}
-          <a href={link} {target}
-            ><button
-              class="rounded-lg bg-cyan-500 px-5 py-2 shadow-md/50 transition hover:bg-cyan-400 hover:shadow-lg/50"
-              >{text}</button
-            ></a
-          ><br />
+        {#each links as { href, text } (href)}
+          <div>
+            <a href={resolve(href)}
+              ><button
+                class="rounded-lg bg-cyan-500 px-5 py-2 shadow-md/50 transition hover:bg-cyan-400 hover:shadow-lg/50"
+                >{text}</button
+              ></a
+            >
+          </div>
+        {/each}
+        {#each externalLinks as { href, text } (href)}
+          <div>
+            <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+            <a {href} target="_blank" rel="external"
+              ><button
+                class="rounded-lg bg-cyan-500 px-5 py-2 shadow-md/50 transition hover:bg-cyan-400 hover:shadow-lg/50"
+                >{text}</button
+              ></a
+            >
+          </div>
         {/each}
       </div>
     </div>
