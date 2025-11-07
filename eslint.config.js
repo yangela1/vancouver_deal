@@ -57,7 +57,10 @@ export default defineConfig(
     },
     settings: {
       svelte: {
-        ignoreWarnings: ["@typescript-eslint/no-unsafe-call"],
+        ignoreWarnings: [
+          "@typescript-eslint/no-unsafe-call",
+          "@typescript-eslint/no-confusing-void-expression",
+        ],
       },
     },
   },

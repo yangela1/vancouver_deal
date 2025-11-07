@@ -13,6 +13,13 @@
   ] as const;
 </script>
 
+{#snippet btn(text: string)}
+  <button
+    class="rounded-lg bg-cyan-500 px-5 py-2 shadow-md/50 transition hover:bg-cyan-400 hover:shadow-lg/50"
+    >{text}</button
+  >
+{/snippet}
+
 <div class="px-2 py-5 text-center font-display sm:py-10">
   <div class="mx-auto flex max-w-lg rounded-4xl bg-zinc-100 shadow-lg/50">
     <div class="m-3 rounded-3xl border-3 *:px-10 *:py-5">
@@ -31,23 +38,13 @@
         </p>
         {#each links as { href, text } (href)}
           <div>
-            <a href={resolve(href)}
-              ><button
-                class="rounded-lg bg-cyan-500 px-5 py-2 shadow-md/50 transition hover:bg-cyan-400 hover:shadow-lg/50"
-                >{text}</button
-              ></a
-            >
+            <a href={resolve(href)}>{@render btn(text)}</a>
           </div>
         {/each}
         {#each externalLinks as { href, text } (href)}
           <div>
             <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-            <a {href} target="_blank" rel="external"
-              ><button
-                class="rounded-lg bg-cyan-500 px-5 py-2 shadow-md/50 transition hover:bg-cyan-400 hover:shadow-lg/50"
-                >{text}</button
-              ></a
-            >
+            <a {href} target="_blank" rel="external">{@render btn(text)}</a>
           </div>
         {/each}
       </div>
