@@ -43,6 +43,7 @@
         {/each}
         {#each externalLinks as { href, text } (href)}
           <div>
+            <!-- TODO: remove when this gets resolved -->
             <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
             <a {href} target="_blank" rel="external">{@render btn(text)}</a>
           </div>

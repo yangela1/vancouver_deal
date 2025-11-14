@@ -1,10 +1,6 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
 
-  // See https://github.com/sveltejs/eslint-plugin-svelte/pull/1380
-  // TODO: remove when this gets fixed
-  /* eslint-disable svelte/no-navigation-without-resolve */
-
   const credits = [
     {
       title: "An aerial view of a city and a harbor photo",
@@ -60,6 +56,11 @@
         </h1>
       </div>
       <div class="space-y-4 text-xl font-semibold">
+        <!--
+          eslint-disable svelte/no-navigation-without-resolve --
+          See https://github.com/sveltejs/eslint-plugin-svelte/pull/1380
+          TODO: remove when this gets resolved
+        -->
         {#each credits as credit (credit.titleLink)}
           <p>
             <a
@@ -89,6 +90,7 @@
           </p>
           <hr class="border" />
         {/each}
+        <!-- eslint-enable -->
         <div>
           <a href={resolve("/")}
             ><button
