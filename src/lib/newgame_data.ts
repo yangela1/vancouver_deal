@@ -76,7 +76,7 @@ export type RentData =
       4: number;
     };
 
-// Deck with one copy of each card, and quantity that each card should have.
+/** Deck with one copy of each card, and quantity that each card should have. */
 const deckQuantities: (
   | (Exclude<Card, PropertyCard> & { quantity: number })
   | PropertyCard
@@ -394,14 +394,17 @@ const deckQuantities: (
   },
 ];
 
-// Deck with quantities of each card as specified in deckQuantities.
+/**
+ * Deck with quantities of each card as specified in deckQuantities.
+ * One copy each for cards without specified quantities.
+ */
 const deck: Card[] = deckQuantities
   .map((card) => ("quantity" in card ? card : { ...card, quantity: 1 }))
   .flatMap(({ quantity, ...card }) =>
     Array.from({ length: quantity }, () => structuredClone(card)),
   );
 
-// The rent costs associated with each property colour.
+/** The rent costs associated with each property colour. */
 export const rent: Record<Colour, RentData> = {
   brown: {
     1: 1,
@@ -469,7 +472,7 @@ export const rent: Record<Colour, RentData> = {
   },
 };
 
-// The value associated with each property colour.
+/** The value associated with each property colour. */
 export const value: Record<Colour, number> = {
   brown: 1,
   lightblue: 1,
