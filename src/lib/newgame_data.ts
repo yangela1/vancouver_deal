@@ -23,7 +23,7 @@ export interface ActionCard {
 
 export interface RentCard {
   type: "rent";
-  colours: Colour[];
+  colours: [Colour, Colour];
   value: number;
 }
 
@@ -34,7 +34,7 @@ export interface RentRainbowCard {
 
 export interface PropertyWildCard {
   type: "property_wild";
-  colours: Colour[];
+  colours: [Colour, Colour];
   value: number;
 }
 
@@ -57,13 +57,6 @@ export type Card =
   | PropertyRainbowCard
   | PropertyCard;
 
-type CardQuantity =
-  | {
-      card: Exclude<Card, PropertyCard>;
-      quantity: number;
-    }
-  | PropertyCard;
-
 export type RentData =
   | {
       1: number;
@@ -84,236 +77,179 @@ export type RentData =
     };
 
 // Deck with one copy of each card, and quantity that each card should have.
-const deckQuantities: CardQuantity[] = [
+const deckQuantities: (
+  | (Exclude<Card, PropertyCard> & { quantity: number })
+  | PropertyCard
+)[] = [
   {
-    card: {
-      type: "money",
-      value: 1,
-    },
+    type: "money",
+    value: 1,
     quantity: 6,
   },
   {
-    card: {
-      type: "money",
-      value: 2,
-    },
+    type: "money",
+    value: 2,
     quantity: 5,
   },
   {
-    card: {
-      type: "money",
-      value: 3,
-    },
+    type: "money",
+    value: 3,
     quantity: 3,
   },
   {
-    card: {
-      type: "money",
-      value: 4,
-    },
+    type: "money",
+    value: 4,
     quantity: 3,
   },
   {
-    card: {
-      type: "money",
-      value: 5,
-    },
+    type: "money",
+    value: 5,
     quantity: 2,
   },
   {
-    card: {
-      type: "money",
-      value: 10,
-    },
+    type: "money",
+    value: 10,
     quantity: 1,
   },
   {
-    card: {
-      type: "action",
-      name: "pass_go",
-      value: 1,
-    },
+    type: "action",
+    name: "pass_go",
+    value: 1,
     quantity: 10,
   },
   {
-    card: {
-      type: "action",
-      name: "rent_increase",
-      value: 1,
-    },
+    type: "action",
+    name: "rent_increase",
+    value: 1,
     quantity: 2,
   },
   {
-    card: {
-      type: "action",
-      name: "convenience_fee",
-      value: 2,
-    },
+    type: "action",
+    name: "convenience_fee",
+    value: 2,
     quantity: 3,
   },
   {
-    card: {
-      type: "action",
-      name: "security_deposit",
-      value: 3,
-    },
+    type: "action",
+    name: "security_deposit",
+    value: 3,
     quantity: 3,
   },
   {
-    card: {
-      type: "action",
-      name: "new_landlord",
-      value: 3,
-    },
+    type: "action",
+    name: "new_landlord",
+    value: 3,
     quantity: 3,
   },
   {
-    card: {
-      type: "action",
-      name: "property_repod",
-      value: 3,
-    },
+    type: "action",
+    name: "property_repod",
+    value: 3,
     quantity: 3,
   },
   {
-    card: {
-      type: "action",
-      name: "laneway_house",
-      value: 3,
-    },
+    type: "action",
+    name: "laneway_house",
+    value: 3,
     quantity: 3,
   },
   {
-    card: {
-      type: "action",
-      name: "condo_tower",
-      value: 4,
-    },
+    type: "action",
+    name: "condo_tower",
+    value: 4,
     quantity: 2,
   },
   {
-    card: {
-      type: "action",
-      name: "tax_evasion",
-      value: 4,
-    },
+    type: "action",
+    name: "tax_evasion",
+    value: 4,
     quantity: 3,
   },
   {
-    card: {
-      type: "action",
-      name: "mass_eviction",
-      value: 5,
-    },
+    type: "action",
+    name: "mass_eviction",
+    value: 5,
     quantity: 2,
   },
   {
-    card: {
-      type: "rent",
-      colours: ["brown", "lightblue"],
-      value: 1,
-    },
+    type: "rent",
+    colours: ["brown", "lightblue"],
+    value: 1,
     quantity: 2,
   },
   {
-    card: {
-      type: "rent",
-      colours: ["mint", "black"],
-      value: 1,
-    },
+    type: "rent",
+    colours: ["mint", "black"],
+    value: 1,
     quantity: 2,
   },
   {
-    card: {
-      type: "rent",
-      colours: ["magenta", "orange"],
-      value: 1,
-    },
+    type: "rent",
+    colours: ["magenta", "orange"],
+    value: 1,
     quantity: 2,
   },
   {
-    card: {
-      type: "rent",
-      colours: ["red", "yellow"],
-      value: 1,
-    },
+    type: "rent",
+    colours: ["red", "yellow"],
+    value: 1,
     quantity: 2,
   },
   {
-    card: {
-      type: "rent",
-      colours: ["darkblue", "green"],
-      value: 1,
-    },
+    type: "rent",
+    colours: ["darkblue", "green"],
+    value: 1,
     quantity: 2,
   },
   {
-    card: {
-      type: "rent_rainbow",
-      value: 3,
-    },
+    type: "rent_rainbow",
+    value: 3,
     quantity: 3,
   },
   {
-    card: {
-      type: "property_wild",
-      colours: ["lightblue", "brown"],
-      value: 1,
-    },
+    type: "property_wild",
+    colours: ["lightblue", "brown"],
+    value: 1,
     quantity: 1,
   },
   {
-    card: {
-      type: "property_wild",
-      colours: ["black", "mint"],
-      value: 2,
-    },
+    type: "property_wild",
+    colours: ["black", "mint"],
+    value: 2,
     quantity: 1,
   },
   {
-    card: {
-      type: "property_wild",
-      colours: ["magenta", "orange"],
-      value: 2,
-    },
+    type: "property_wild",
+    colours: ["magenta", "orange"],
+    value: 2,
     quantity: 2,
   },
   {
-    card: {
-      type: "property_wild",
-      colours: ["red", "yellow"],
-      value: 3,
-    },
+    type: "property_wild",
+    colours: ["red", "yellow"],
+    value: 3,
     quantity: 2,
   },
   {
-    card: {
-      type: "property_wild",
-      colours: ["darkblue", "green"],
-      value: 4,
-    },
+    type: "property_wild",
+    colours: ["darkblue", "green"],
+    value: 4,
     quantity: 1,
   },
   {
-    card: {
-      type: "property_wild",
-      colours: ["green", "black"],
-      value: 4,
-    },
+    type: "property_wild",
+    colours: ["green", "black"],
+    value: 4,
     quantity: 1,
   },
   {
-    card: {
-      type: "property_wild",
-      colours: ["lightblue", "black"],
-      value: 4,
-    },
+    type: "property_wild",
+    colours: ["lightblue", "black"],
+    value: 4,
     quantity: 1,
   },
   {
-    card: {
-      type: "property_rainbow",
-    },
+    type: "property_rainbow",
     quantity: 2,
   },
   {
@@ -459,11 +395,11 @@ const deckQuantities: CardQuantity[] = [
 ];
 
 // Deck with quantities of each card as specified in deckQuantities.
-const deck: Card[] = deckQuantities.flatMap((card) =>
-  Array.from({ length: "quantity" in card ? card.quantity : 1 }, () =>
-    structuredClone("card" in card ? card.card : card),
-  ),
-);
+const deck: Card[] = deckQuantities
+  .map((card) => ("quantity" in card ? card : { ...card, quantity: 1 }))
+  .flatMap(({ quantity, ...card }) =>
+    Array.from({ length: quantity }, () => structuredClone(card)),
+  );
 
 // The rent costs associated with each property colour.
 export const rent: Record<Colour, RentData> = {
